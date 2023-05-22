@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import * as XLSX from "xlsx";
 
-import "./assets/styles/excel.css";
+import "./assets/styles/Excel.css";
 
-function excel() {
+function Excel() {
   const [data, setData] = useState([]);
 
   const handleFileUpload = (e) => {
@@ -50,4 +50,4 @@ function excel() {
   );
 }
 
-export default excel;
+export default Excel;

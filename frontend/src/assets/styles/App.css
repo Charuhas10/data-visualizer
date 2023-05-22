@@ -1,4 +1,4 @@
-*{
+* {
   background-color: #d0f5be;
 }
 
@@ -7,4 +7,36 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+h1{
+  color: #FBFFDC;
+}
+
+button {
+  cursor: pointer;
+  display: flex;
+  font-weight: 600;
+  justify-content: space-between;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  /* border: 1px solid transparent; */
+  border: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  background-color: #fbffdc;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+  background-color: #f0f5c4;
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: none;
 }
