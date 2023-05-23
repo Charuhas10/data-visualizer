@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "./components/Button";
+import Form from "./components/Form";
+import Excel from "./components/Excel";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./assets/styles/App.css";
 
@@ -10,8 +12,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Button />} />
-          <Route path="/form" element={<h1>Form</h1>} />
-          <Route path="/excel" element={<h1>Excel</h1>} />
+          <Route path="/form" element={<Form />} />
+          <Route path="/excel" element={<Excel />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Router>
