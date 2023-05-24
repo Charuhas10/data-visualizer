@@ -31,9 +31,9 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form-inputs"  onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="reservationId">Reservation ID:</label>
+        <label htmlFor="reservationId">Reservation ID: </label>
         <input
           type="text"
           id="reservationId"
@@ -43,7 +43,7 @@ const Form = () => {
         />
       </div>
       <div>
-        <label htmlFor="rating">Rating:</label>
+        <label htmlFor="rating">Rating: </label>
         <input
           type="number"
           id="rating"
@@ -54,7 +54,7 @@ const Form = () => {
           required
         />
       </div>
-      <button type="submit">Submit</button>
+      <button className="form-button" type="submit">Submit</button>
     </form>
   );
 };

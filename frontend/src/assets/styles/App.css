@@ -39,19 +39,35 @@ button:active {
   box-shadow: none;
 }
 
-.form-inputs{
+.form-inputs {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
-  margin-top: 5.5rem;
-  gap: 1rem;
+  justify-content: center;
+  align-items: start;
+  margin-top: 5rem;
+  margin-left: 25rem;
+  gap: 2.5rem;
 }
 
-.submit{
-  margin-top: 1rem;
-  padding: 0.75rem 0.75rem;
+label {
+  font-size: 2.5rem;
+  color: #112d4e;
+  margin-top: 2rem;
+}
+
+input {
+  font-size: 2rem;
+  /* padding: 0.5rem 0.5rem; */
   border-radius: 8px;
-  border: px solid #3f72af;
-  cursor: pointer;
+  border: 1px solid #3f72af;
+  margin-top: 1rem;
+}
+
+#rating{
+  margin-left: 9.5rem;
+}
+
+.form-button {
+  margin-top: 1.5rem;
+  margin-left: 20rem;
 }
