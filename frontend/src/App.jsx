@@ -2,10 +2,33 @@ import React from "react";
 import Button from "./components/Button";
 import Form from "./components/Form";
 import Excel from "./components/Excel";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./assets/styles/App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function App() {
+  // const [data, setData] = useState([{}]);
+
+  // useEffect(() => {
+  //   fetch("/api/getData")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data);
+  //       console.log(data);
+  //     });
+  // }, []);
+
+  // const [data, setData] = useState([{}]);
+
+  // useEffect(() => {
+  //   fetch("/api/getData")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data);
+  //       console.log(data);
+  //     });
+  // }, []);
+
   return (
     <div>
       <h1>Data Insights Hub</h1>

@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
+from flask_cors import CORS
 import pandas as pd
 
 app = Flask(__name__)
+CORS(app)
 
 client = MongoClient("mongodb://localhost:27017/")
 db = client["dataAnalyticsDB"]
@@ -42,27 +44,21 @@ def run_analytics():
     analytics_output = {}
     total_records = len(data)
 
-    # Calculate average rating for the restaurant
-    total_rating = sum(entry["rating"] for entry in data)
-    average_rating = total_rating / total_records
-    analytics_output["average_rating"] = average_rating
+    # Calculate average, minimum, and maximum rating for the restaurant
+    ratings = [entry["rating"] for entry in data]
+    average_rating = sum(ratings) / total_records
+    min_rating = min(ratings)
+    max_rating = max(ratings)
 
-    # Analyze the distribution of ratings for different aspects
-    aspects = ["food_quality", "service", "ambience"]
-    ratings_by_aspect = {}
-    for aspect in aspects:
-        ratings = [entry[aspect] for entry in data]
-        ratings_by_aspect[aspect] = {
-            "min_rating": min(ratings),
-            "max_rating": max(ratings),
-            "avg_rating": sum(ratings) / total_records,
-        }
-    analytics_output["ratings_by_aspect"] = ratings_by_aspect
+    analytics_output["average_rating"] = average_rating
+    analytics_output["min_rating"] = min_rating
+    analytics_output["max_rating"] = max_rating
 
     # Store the output in the database
     output_collection.insert_one(analytics_output)
 
     return jsonify({"message": "Analytics executed successfully"})
+
 
 @app.route("/api/getData", methods=["GET"])
 def get_data():

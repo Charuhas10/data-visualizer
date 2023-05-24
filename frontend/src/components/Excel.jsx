@@ -1,59 +1,107 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Excel = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Perform file validation and API call to handle the uploaded Excel file
-    if (selectedFile && selectedFile.type === "application/vnd.ms-excel") {
-      // File is valid, proceed with the API call or further processing
-      // Example:
-      // const formData = new FormData();
-      // formData.append('excelFile', selectedFile);
-      // fetch('/api/upload-excel', {
-      //   method: 'POST',
-      //   body: formData,
-      // })
-      //   .then(response => response.json())
-      //   .then(data => {
-      //     // Handle the response
-      //   })
-      //   .catch(error => {
-      //     // Handle the error
-      //   });
-
-      // Reset the selected file
-      setSelectedFile(null);
-    } else {
-      // File is invalid, display an error message or perform appropriate error handling
-      console.log("Invalid file format. Only Excel files are allowed.");
+  const handleUpload = async () => {
+    if (!file) {
+      return;
     }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      await axios.post("http://localhost:5000/api/excel", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      // Display a success message or perform any additional actions
+      console.log("File uploaded successfully");
+    } catch (error) {
+      // Handle any errors that occur during the API call
+      console.error("Error uploading file:", error.message);
+    }
+
+    // Clear the file input after uploading
+    setFile(null);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="excelFile">Upload Excel File:</label>
-      <input
-        type="file"
-        id="excelFile"
-        accept=".xls, .xlsx"
-        onChange={handleFileChange}
-        required
-      />
-
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
+      <button onClick={handleUpload} disabled={!file}>
+        Upload
+      </button>
+    </div>
   );
 };
 
 export default Excel;
+
+// import React, { useState } from "react";
+
+// const Excel = () => {
+//   const [selectedFile, setSelectedFile] = useState(null);
+
+//   const handleFileChange = (e) => {
+//     const file = e.target.files[0];
+//     setSelectedFile(file);
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     // Perform file validation and API call to handle the uploaded Excel file
+//     if (selectedFile && selectedFile.type === "application/vnd.ms-excel") {
+//       // File is valid, proceed with the API call or further processing
+//       // Example:
+//       // const formData = new FormData();
+//       // formData.append('excelFile', selectedFile);
+//       // fetch('/api/upload-excel', {
+//       //   method: 'POST',
+//       //   body: formData,
+//       // })
+//       //   .then(response => response.json())
+//       //   .then(data => {
+//       //     // Handle the response
+//       //   })
+//       //   .catch(error => {
+//       //     // Handle the error
+//       //   });
+
+//       // Reset the selected file
+//       setSelectedFile(null);
+//     } else {
+//       // File is invalid, display an error message or perform appropriate error handling
+//       console.log("Invalid file format. Only Excel files are allowed.");
+//     }
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label htmlFor="excelFile">Upload Excel File: </label>
+//       <input
+//         type="file"
+//         id="excelFile"
+//         accept=".xls, .xlsx"
+//         onChange={handleFileChange}
+//         required
+//       />
+
+//       <button type="submit">Submit</button>
+//     </form>
+//   );
+// };
+
+// export default Excel;
 
 // import React from "react";
 // import { useState } from "react";

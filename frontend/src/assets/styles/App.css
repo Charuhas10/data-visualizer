@@ -38,3 +38,20 @@ button:active {
   transform: scale(0.99);
   box-shadow: none;
 }
+
+.form-inputs{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: 5.5rem;
+  gap: 1rem;
+}
+
+.submit{
+  margin-top: 1rem;
+  padding: 0.75rem 0.75rem;
+  border-radius: 8px;
+  border: px solid #3f72af;
+  cursor: pointer;
+}
