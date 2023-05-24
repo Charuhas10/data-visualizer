@@ -18,7 +18,7 @@ const Excel = () => {
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:5000/api/excel", formData, {
+      await axios.post("/api/excel", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -35,12 +35,14 @@ const Excel = () => {
   };
 
   return (
-    <div>
-      <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={!file}>
-        Upload
-      </button>
-    </div>
+    <React.Fragment>
+      <div className="cta">
+        <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} style={{border: "none"}}/>
+        <button className="form-button" onClick={handleUpload} disabled={!file}>
+          Upload
+        </button>
+      </div>
+    </React.Fragment>
   );
 };
 

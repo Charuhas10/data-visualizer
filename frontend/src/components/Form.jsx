@@ -17,7 +17,11 @@ const Form = () => {
     console.log(data);
     try {
       // Make a POST request to the backend API to ingest the form data
-      await axios.post("http://localhost:5000/api/form", data);
+      await axios.post("/api/form", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       // Display a success message or perform any additional actions
       console.log("Data ingested successfully");
     } catch (error) {
@@ -31,36 +35,43 @@ const Form = () => {
   };
 
   return (
-    <form className="form-inputs"  onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="reservationId">Reservation ID: </label>
-        <input
-          type="text"
-          id="reservationId"
-          value={reservationId}
-          onChange={(e) => setReservationId(e.target.value)}
-          required
-        />
+    <React.Fragment>
+      <div className="cta">
+        <form className="form-inputs" onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="reservationId">Reservation ID: </label>
+            <label htmlFor="rating">Rating: </label>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="reservationId"
+              value={reservationId}
+              onChange={(e) => setReservationId(e.target.value)}
+              required
+            />
+            <input
+              type="number"
+              id="rating"
+              min="1"
+              max="5"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+              required
+            />
+          </div>
+        </form>
+        <button className="form-button" type="submit">
+          Submit
+        </button>
       </div>
-      <div>
-        <label htmlFor="rating">Rating: </label>
-        <input
-          type="number"
-          id="rating"
-          min="1"
-          max="5"
-          value={rating}
-          onChange={(e) => setRating(e.target.value)}
-          required
-        />
-      </div>
-      <button className="form-button" type="submit">Submit</button>
-    </form>
+    </React.Fragment>
   );
 };
 
 export default Form;
 
+//OLD CODE
 // import React, { useState } from "react";
 
 // const Form = () => {
