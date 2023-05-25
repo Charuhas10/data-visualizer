@@ -56,10 +56,18 @@ button:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
 }
 
-.form-inputs {
+.form-inputs{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.inner-form {
   display: flex;
   flex-direction: row;
   justify-content: center;
