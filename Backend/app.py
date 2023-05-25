@@ -17,6 +17,10 @@ print(client)
 @app.route("/api/form", methods=["POST"])
 def ingest_form_data():
     data = request.get_json()  # Retrieve form data
+
+    # Convert rating to a number before storing it
+    data["rating"] = int(data["rating"])
+
     collection.insert_one(data)  # Store data in the database
     return jsonify({"message": "Data ingested successfully"})
 
@@ -55,7 +59,7 @@ def run_analytics():
     analytics_output["max_rating"] = max_rating
 
     # Store the output in the database
-    output_collection.insert_one(analytics_output)
+    output_collection.replace_one({}, analytics_output, upsert=True)
 
     return jsonify({"message": "Analytics executed successfully"})
 
