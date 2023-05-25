@@ -80,7 +80,7 @@ function Visuals() {
     <div>
       <h2>Individual Ratings</h2>
       {data && <Bar data={data.individualRatingsData} />}
-      <h2>Summary</h2>
+      <h2>Analysed Data</h2>
       {data && <Bar data={data.summaryData} />}
     </div>
   );
