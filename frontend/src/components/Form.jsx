@@ -5,7 +5,8 @@ const Form = () => {
   const [reservationId, setReservationId] = useState("");
   const [rating, setRating] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
+    console.log(e.target.value);
     e.preventDefault();
 
     // Create a data object to send in the request
@@ -15,24 +16,57 @@ const Form = () => {
     };
 
     console.log(data);
-    try {
-      // Make a POST request to the backend API to ingest the form data
-      await axios.post("/api/form", data, {
+    // Make a POST request to the backend API to ingest the form data
+    axios
+      .post("http://localhost:5000/api/form", data, {
         headers: {
           "Content-Type": "application/json",
         },
+      })
+      .then((response) => {
+        // Handle the response data
+        const responseData = response.data;
+        // Perform any actions based on the response, e.g., show a success message
+        console.log("Data ingested successfully:", responseData);
+      })
+      .catch((error) => {
+        // Handle any errors that occur during the API call
+        console.error("Error submitting form:", error.message);
       });
-      // Display a success message or perform any additional actions
-      console.log("Data ingested successfully");
-    } catch (error) {
-      // Handle any errors that occur during the API call
-      console.error("Error ingesting data:", error.message);
-    }
 
     // Clear the form inputs after submitting
     setReservationId("");
     setRating("");
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // Create a data object to send in the request
+  //   const data = {
+  //     reservationId,
+  //     rating,
+  //   };
+
+  //   console.log(data);
+  //   try {
+  //     // Make a POST request to the backend API to ingest the form data
+  //     await axios.post("/api/form", data, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     // Display a success message or perform any additional actions
+  //     console.log("Data ingested successfully");
+  //   } catch (error) {
+  //     // Handle any errors that occur during the API call
+  //     console.error("Error ingesting data:", error.message);
+  //   }
+
+  //   // Clear the form inputs after submitting
+  //   setReservationId("");
+  //   setRating("");
+  // };
 
   return (
     <React.Fragment>
@@ -60,10 +94,10 @@ const Form = () => {
               required
             />
           </div>
+          <button className="form-button" type="submit">
+            Submit
+          </button>
         </form>
-        <button className="form-button" type="submit">
-          Submit
-        </button>
       </div>
     </React.Fragment>
   );
